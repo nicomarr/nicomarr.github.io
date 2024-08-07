@@ -37,7 +37,7 @@ permalink: /publications/
 {% endif %}
 
 
-
+{{ site.data.update-log.basename }}
 <br>
 <br>
 Last update: {{ site.data.update-log.last_modified }} | Back to <a href="{{ '/home/' | relative_url }}">Home</a>.
