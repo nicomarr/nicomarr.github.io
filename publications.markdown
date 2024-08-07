@@ -4,6 +4,7 @@ title: Publications
 permalink: /publications/
 ---
 
+<ul>
 {% if site.data.articles-metadata %}
   {% assign publications_by_year = site.data.articles-metadata | group_by: "publication_year" | sort: "name" | reverse %}
   {% for year in publications_by_year %}
@@ -35,9 +36,7 @@ permalink: /publications/
 {% else %}
   <p>No publication data available. </p>
 {% endif %}
-
-
-{{ site.data }}
+</ul>
 <br>
 <br>
 Last update: {{ site.data.update-log.last_modified }} | Back to <a href="{{ '/home/' | relative_url }}">Home</a>.
