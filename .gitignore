@@ -6,4 +6,4 @@ _drafts
 vendor
 .DS_Store
 __pycache__/
-*.pyc
+*.pyc.DS_Store
