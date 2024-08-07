@@ -1,6 +1,5 @@
 ---
 layout: home
-permalink: /home/
 ---
 Hi there! I'm Nico Marr, and this is my personal website. 
 
