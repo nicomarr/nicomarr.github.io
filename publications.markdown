@@ -33,11 +33,11 @@ permalink: /publications/
     </ul>
   {% endfor %}
 {% else %}
-  <p>No publication data available. Make sure data are included in config.yml. </p>
+  <p>No publication data available. </p>
 {% endif %}
 
-.
-{{ site.data.update-log.name }}
+
+{{ site.data }}
 <br>
 <br>
 Last update: {{ site.data.update-log.last_modified }} | Back to <a href="{{ '/home/' | relative_url }}">Home</a>.
