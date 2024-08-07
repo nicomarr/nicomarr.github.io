@@ -1,34 +1,35 @@
-# This config file is meant for settings that affect the whole site.
+# Welcome to Jekyll!
 #
-# For technical reasons, this file is *NOT* reloaded automatically when using
-# 'bundle exec jekyll serve'. Restart the server to apply changes.
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
 #
-# Help with YAML syntax and quick references:
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you:
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 #
-# Site settings:
-# Variables defined here will be used in the templates.
-# Custom variables created here will be accessible in the templates via
-# {{ site.myvariable }}.
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
 
-description: >- # will appear in the document head meta (for Google search results) and in the feed.xml site description
-  © 2024 Nico Marr. 
-baseurl: /docs/ # the subpath of the site, e.g. /blog
-url: "" # the base hostname & protocol for the site, e.g. http://example.com
-github_username:  nicomarr
+title: title
+description: >- # this means to ignore newlines until "baseurl:"
+  description.
+baseurl: "docs" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: jekyllrb
+github_username:  jekyll
 
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
-
-# Set order of navigation links
-header_pages:
-  - about.markdown
-  - publications.markdown
-  - tutorials.markdown
-
 
 # Exclude from processing.
 # The following items will not be processed, by default.
