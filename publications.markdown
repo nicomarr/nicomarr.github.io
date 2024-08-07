@@ -36,8 +36,8 @@ permalink: /publications/
   <p>No publication data available. Make sure data are included in config.yml. </p>
 {% endif %}
 
-
-{{ site.data.update-log.basename }}
+.
+{{ site.data.update-log.name }}
 <br>
 <br>
 Last update: {{ site.data.update-log.last_modified }} | Back to <a href="{{ '/home/' | relative_url }}">Home</a>.
