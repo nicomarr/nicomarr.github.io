@@ -4,7 +4,7 @@ title: About me
 permalink: /about/
 ---
 
-<img src="{{ '/assets/img/profile-pic.jpg' | relative_url }}" alt="Profile Picture" style="float: left; margin: 5px 30px 0 0;" width="215px">
+<img src="{{ '/assets/img/profile-pic.jpg' | relative_url }}" alt="Profile Picture" style="float: left; margin: 5px 30px 0 0;" width="150px">
 
 For over 20 years, I have dedicated my career to conducting biomedical research, spanning from basic and pre-clinical research to observational clinical studies.
 <br>
