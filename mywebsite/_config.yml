@@ -1,0 +1,51 @@
+# This config file is meant for settings that affect the whole site.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when using
+# 'bundle exec jekyll serve'. Restart the server to apply changes.
+#
+# Help with YAML syntax and quick references:
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
+# Site settings:
+# Variables defined here will be used in the templates.
+# Custom variables created here will be accessible in the templates via
+# {{ site.myvariable }}.
+
+description: >- # will appear in the document head meta (for Google search results) and in the feed.xml site description
+  © 2024 Nico Marr. 
+baseurl: "" # the subpath of the site, e.g. /blog
+url: "" # the base hostname & protocol for the site, e.g. http://example.com
+github_username:  nicomarr
+
+# Build settings
+theme: minima
+# plugins:
+#   - jekyll-feed
+
+# Set order of navigation links
+header_pages:
+  - about.markdown
+  - publications.markdown
+  - tutorials.markdown
+
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
