@@ -33,7 +33,7 @@ permalink: /publications/
     </ul>
   {% endfor %}
 {% else %}
-  <p>No publication data available.</p>
+  <p>No publication data available. Make sure data are included in config.yml. </p>
 {% endif %}
 
 
