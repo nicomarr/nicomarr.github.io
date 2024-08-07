@@ -18,4 +18,4 @@ Comming soon...
 <br>
 <br>
 <br>
-Back to <a href="{{ '/home/' | relative_url }}">Home</a>.
+Back to <a href="{{ '/' | relative_url }}">Home</a>.

@@ -29,4 +29,4 @@ I am passionate about data-driven approaches with the long-term goal of advancin
 I obtained my doctoral degree from the <a href="{{ 'https://www.uni-wuerzburg.de/en/' }}">University of Würzburg</a>, conducting dissertation research at the <a href="{{ 'https://www.ubc.ca/' }}">University of British Columbia</a>, where I also began my early postdoctoral training. During that time, my research focused on immune evasion strategies of <i>Bordetella pertussis</i>, the causative agent of whooping cough.
 <br>
 <br>
-Back to <a href="{{ '/home/' | relative_url }}">Home</a>.
+Back to <a href="{{ '/' | relative_url }}">Home</a>.

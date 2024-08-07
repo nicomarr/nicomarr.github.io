@@ -39,4 +39,4 @@ permalink: /publications/
 </ul>
 <br>
 <br>
-Last update: {{ site.data.update-log.last_modified }} | Back to <a href="{{ '/home/' | relative_url }}">Home</a>.
+Last update: {{ site.data.update-log.last_modified }} | Back to <a href="{{ '/' | relative_url }}">Home</a>.
