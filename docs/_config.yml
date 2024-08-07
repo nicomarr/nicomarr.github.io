@@ -14,7 +14,7 @@
 
 description: >- # will appear in the document head meta (for Google search results) and in the feed.xml site description
   © 2024 Nico Marr. 
-baseurl: "docs" # the subpath of the site, e.g. /blog
+baseurl: /docs/ # the subpath of the site, e.g. /blog
 url: "" # the base hostname & protocol for the site, e.g. http://example.com
 github_username:  nicomarr
 
