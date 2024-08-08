@@ -1,0 +1,33 @@
+# Site settings
+title: "Home"
+description: >-
+  (c) 2024 Nico Marr.
+baseurl: ""
+url: ""
+github_username:  nicomarr
+
+# Build settings
+theme: minima
+# plugins:
+#   - jekyll-feed
+
+header_pages:
+  - tutorials.markdown
+  - publications.markdown
+  - about.markdown
+
+include:
+  - _data/articles-metadata.csv
+  - _data/update-log.json
+  
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
