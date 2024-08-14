@@ -4,7 +4,14 @@ title: Tutorials
 permalink: /tutorials/
 ---
 
-Comming soon...
+{% for post in site.posts %}
+  {% if post.categories contains 'tutorials' %}
+  <ul>
+  <h3><a href="{{ post.url }}">{{ post.title }}</a></h3> 
+  Posted on {{ post.date | date: "%b %d, %Y" }}
+  </ul>
+  {% endif %}
+{% endfor %}
 
 <br>
 <br>
