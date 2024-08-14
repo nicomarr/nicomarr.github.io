@@ -20,6 +20,7 @@ Check out the accompanying [Jupyter notebook][gh-nicomarr-public-tutorials] to r
 - selenium
 - webdriver-manager
 - nbformat
+- plotly
 
 In a Jupyter notebook environment, simply install these libraries using line magics and pip, like so:  
 ```
@@ -28,6 +29,7 @@ In a Jupyter notebook environment, simply install these libraries using line mag
 %pip install -qU selenium
 %pip install -qU webdriver-manager
 %pip install -qU nbformat
+%pip install -qU plotly
 ```
 <br>
 <br>
@@ -457,6 +459,9 @@ Title: Automating Radiologist Workflow, Part 2: Hands-Free Navigation...
 Status messages: 2024-08-14: Successfully retrieved metadata with UID W2029380707. 2024-08-14: Work with UID https://openalex.org/W2029380707 is not open access or 'best_oa_location' key not found. Skipped PDF download. 
 DOI: https://doi.org/10.1016/j.jacr.2008.05.012
 ```
+<br>
+<br>
+Be sure to check out the accompanying [Jupyter notebook][gh-nicomarr-public-tutorials], which also includes a bonus feature to visualize open access statistics for the retrieved works.
 <br>
 <br>
 <br>
