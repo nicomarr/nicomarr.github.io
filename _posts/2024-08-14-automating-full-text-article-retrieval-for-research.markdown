@@ -146,6 +146,10 @@ Download PDF   Read Full Text   🔓   📖
 
 ### Download PDF files
 
+Before we proceed with downloading PDF files, it's important to note:
+
+**Copyright Notice**: Downloading PDFs may be subject to copyright restrictions. Users are responsible for ensuring they have the right to access and download the content. Always respect the terms of use of the content providers and adhere to applicable copyright laws.
+
 We can pass an additional argument to the `get_works()` function to save the PDF files a specified directory, like so:
 
 {% highlight python %}
