@@ -148,8 +148,8 @@ Download PDF   Read Full Text   🔓   📖
 
 Before we proceed with downloading PDF files, it's important to note:
 
-**Copyright Notice**: Downloading PDFs may be subject to copyright restrictions. Users are responsible for ensuring they have the right to access and download the content. Always respect the terms of use of the content providers and adhere to applicable copyright laws.
-
+**Copyright Notice**: Downloading PDFs may be subject to copyright restrictions. Users are responsible for ensuring they have the right to access and download the content. Always respect the terms of use of the content providers and adhere to applicable copyright laws. See the following [README.md](https://github.com/nicomarr/public-tutorials/blob/main/README.md) file for further details. 
+<br>
 We can pass an additional argument to the `get_works()` function to save the PDF files a specified directory, like so:
 
 {% highlight python %}
@@ -326,6 +326,8 @@ Retrieving citations: 100%|██████████| 3/3 [00:03<00:00, 1.3
 Processing citations: 100%|██████████| 216/216 [00:00<00:00, 1332308.33it/s]
 ```
 <br>
+<br>
+**Reminder**: When using the `get_citations` function to download PDFs, please be aware of potential copyright restrictions. Ensure you have the right to access and download the content, and always respect the terms of use of the content providers. Refer to the Copyright Notice in the following [README.md](https://github.com/nicomarr/public-tutorials/blob/main/README.md) file for more details.
 <br>
 To download PDFs and store the metadata in a cache directory, we can pass in the `pdf_output_dir` and `persist_dir` arguments, like so:
 
