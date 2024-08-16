@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Automating Full-Text Article Retrieval for Research"
+title: "Streamlining Full-Text Article Retrieval for Research"
 categories: tutorials
 ---
 Welcome to the first in a series of short tutorials aimed at making LLM-powered applications more accessible for health and life sciences researchers. This tutorial introduces Python utility functions for interacting with the [OpenAlex API][how-to-use-the-openalex-api], a comprehensive, open-access catalog of global research named after the ancient Library of Alexandria and made by the nonprofit [OurResearch][ourresearch-url].
 
-While other excellent [community libraries][openalexR] exist for querying the OpenAlex API, my focus here is on functions tailored for automating the retrieval of full-text articles indexed in PubMed and leveraging OpenAlex's extensive citation data. These features are particularly valuable for Retrieval-Augmented Generation (RAG) applications, which can enhance language model performance and improve response quality.
+While other excellent [community libraries][openalexR] exist for querying the OpenAlex API, my focus here is on functions tailored for streamlining the retrieval of full-text articles indexed in PubMed and leveraging OpenAlex's extensive citation data. These features are particularly valuable for Retrieval-Augmented Generation (RAG) applications, which can enhance language model performance and improve response quality.
 
 Check out the accompanying [Jupyter notebook][gh-nicomarr-public-tutorials] to run all examples described below. Note that we use [magic commands][ipython-readthedocs-magics] (%) or (!) to run shell commands within Jupyter notebooks.
 <br>
@@ -146,9 +146,11 @@ Download PDF   Read Full Text   🔓   📖
 
 ### Download PDF files
 
-Before we proceed with downloading PDF files, it's important to note:
+Before we proceed with downloading PDF files, please read the following copyright notice:
 
-**Copyright Notice**: Downloading PDFs may be subject to copyright restrictions. Users are responsible for ensuring they have the right to access and download the content. Always respect the terms of use of the content providers and adhere to applicable copyright laws. See the following [README.md](https://github.com/nicomarr/public-tutorials/blob/main/README.md) file for further details. 
+<div style="background-color: #f0f0f0; border: 1px solid #d0d0d0; padding: 10px; margin: 10px 0;">
+<strong>Copyright Notice:</strong> Downloading PDFs may be subject to copyright restrictions. Users are responsible for ensuring they have the right to access and download the content. Always respect the terms of use of the content providers and adhere to applicable copyright laws. See the following <a href="https://github.com/nicomarr/public-tutorials/blob/main/README.md">README.md</a> file for further details.
+</div>
 
 <br>
 We can pass an additional argument to the `get_works()` function to save the PDF files a specified directory, like so:
@@ -328,7 +330,9 @@ Processing citations: 100%|██████████| 216/216 [00:00<00:00,
 ```
 <br>
 <br>
-**Reminder**: When using the `get_citations` function to download PDFs, please be aware of potential copyright restrictions. Ensure you have the right to access and download the content, and always respect the terms of use of the content providers. Refer to the Copyright Notice in the following [README.md](https://github.com/nicomarr/public-tutorials/blob/main/README.md) file for more details.
+<div style="background-color: #f0f0f0; border: 1px solid #d0d0d0; padding: 10px; margin: 10px 0;">
+<strong>Reminder</strong>: When using the <strong>get_citations()</strong> function to download PDFs, please be aware of potential copyright restrictions. Ensure you have the right to access and download the content, and always respect the terms of use of the content providers. Refer to the Copyright Notice in the following <a href="https://github.com/nicomarr/public-tutorials/blob/main/README.md">README.md</a> file for more details.
+</div>
 
 <br>
 To download PDFs and store the metadata in a cache directory, we can pass in the `pdf_output_dir` and `persist_dir` arguments, like so:
