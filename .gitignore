@@ -6,3 +6,5 @@ vendor
 Gemfile.lock
 _drafts
 .DS_Store
+_py/utils/__pycache__/
+_py/test_data/
