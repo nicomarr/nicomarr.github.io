@@ -14,11 +14,13 @@ theme: minima
 header_pages:
   - tutorials.markdown
   - publications.markdown
+  - tools.markdown
   - about.markdown
 
 include:
   - _data/articles-metadata.csv
   - _data/update-log.json
+  - .mp4
   
 # exclude:
 #   - .sass-cache/
