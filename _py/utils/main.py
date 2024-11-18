@@ -1,6 +1,7 @@
-
 import argparse
 import os
+import sys
+sys.path.append(os.path.expanduser("../utils"))
 from website_utils import update_citations, append_metadata
 
 def main():

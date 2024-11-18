@@ -1,125 +1,166 @@
 import os
+import json
 from typing import Tuple, Set, List, Dict, Any
 from copy import deepcopy
 from datetime import datetime
 import pandas as pd
 from openalex_api_utils import get_works
-import json
 
-def update_citations(file_path: str, verbose: bool = True) -> Tuple[bool, str]:
+def update_citations(
+    file_path: str,
+    save_metadata_to_disk: bool = True,
+    save_backup: bool = True,
+    save_log_file: bool = True, 
+    verbose: bool = True
+) -> Tuple[bool, str]:
     """
-    Update the citation counts in the articles metadata file.
+    Update citation counts in articles metadata file using OpenAlex API data.
 
     Args:
-        file_path (str): Path to the articles metadata file.
-        verbose (bool): Whether to show verbose messages during the process, including progress and errors.
+        file_path (str): Path to the articles metadata CSV file.
+        save_metadata_to_disk (bool): Whether to save the updated metadata to disk. Default is True. Set to False for testing on actual metadata.
+        save_backup (bool): Whether to save a backup of the original metadata Default is True. Set to False for testing on actual metadata.
+        save_log_file (bool): Whether to update the log file. Default is True. Set to False for testing on actual metadata.
+        verbose (bool): Whether to show detailed progress messages. Default is True.
 
     Returns:
-        tuple: A tuple containing a boolean indicating if any updates were made, and a message string with details.
+        Tuple[bool, str]: (success status, detailed message)
     """
-
-    # Input validation
-    assert file_path.endswith(".csv"), "Invalid file format. Please provide a CSV file."
-    assert isinstance(verbose, bool), "Verbose must be a boolean."
+    # Basic input validation
+    file_path = os.path.expanduser(file_path) # Expand relative paths to absolute paths
     if not os.path.exists(file_path):
-        print(f"File not found: {file_path}")
         return False, f"File not found: {file_path}"
+    if not file_path.endswith('.csv'):
+        return False, "Invalid file format. Must be CSV."
+    assert isinstance(save_metadata_to_disk, bool), "save_to_disk must be a boolean."
+    assert isinstance(save_backup, bool), "save_backup must be a boolean."
+    assert isinstance(save_log_file, bool), "save_log_file must be a boolean."
+    assert isinstance(verbose, bool), "verbose must be a boolean."
 
-    # Read the metadata file and sort by publication date, descending
-    if verbose: print("Reading the metadata file...")
+    # Read metadata file
+    if verbose:
+        print("Reading metadata file...")
     try:
         metadata = pd.read_csv(file_path, dtype=str)
-        metadata_bkp = deepcopy(metadata) # Make a deepcopy of the DataFrame to save a backup
-        metadata['publication_date'] = pd.to_datetime(metadata['publication_date'], format='%Y-%m-%d', errors='coerce') # The errors='coerce' parameter will replace any unparsable dates with NaT (Not a Time) values
-        if metadata['publication_date'].isna().any(): # Check if there are any NaT values
-            if verbose:
-                print("Warning: Some publication dates could not be parsed. These will be excluded from sorting.")
-                entries_with_missing_dates = metadata[metadata['publication_date'].isna()]
-                print(
-                    f"Entries with publication dates that could not be parsed: idx {entries_with_missing_dates.index.tolist()}, "
-                    f"PMIDs {entries_with_missing_dates['pmid'].tolist()}, "
-                    f"Article titles {entries_with_missing_dates['article_title'].tolist()}"
-                    )
-            metadata = metadata.dropna(subset=['publication_date']) # Drop rows with missing publication dates
+        metadata["publication_date"] = pd.to_datetime(metadata["publication_date"])
         metadata = metadata.sort_values(by="publication_date", ascending=False)
-        metadata.reset_index(drop=True, inplace=True)
+        
+        if metadata.empty:
+            return False, "Empty metadata file"
+        
+        required_cols = ['oaid', 'cited_by_count', 'updated_date', 'doi_url']
+        if not all(col in metadata.columns for col in required_cols):
+            return False, f"Missing required columns: {set(required_cols) - set(metadata.columns)}"
+            
+        metadata_backup = deepcopy(metadata)
+        
     except Exception as e:
-        if verbose:
-            print(f"An error occurred while reading the metadata file: {e}")
-        return False, f"An error occurred while reading the metadata file: {e}"
-    
-    # Extract PMIDs from the metadata
-    if verbose: print("Extracting PMIDs from the metadata...")
+        return False, f"Error reading metadata file: {str(e)}"
+
+    # Fetch works data from OpenAlex API
+    if verbose:
+        print("Calling OpenAlex API ...")
     try:
-        pmids = metadata["pmid"].astype(str).tolist()
+        valid_ids = []
+        for _, row in metadata.iterrows():
+            oaid = str(row['oaid'])
+            if pd.notna(oaid):
+                oaid_clean = oaid.split('/')[-1] if '/' in oaid else oaid
+                valid_ids.append(oaid_clean)
+
+        if not valid_ids:
+            return False, "No valid OpenAlex IDs found"
+
+        works, failed_calls = get_works(
+            ids=valid_ids,
+            email=os.getenv("EMAIL"),
+            select_fields="id,doi,cited_by_count,updated_date",
+            show_progress=verbose
+        )
     except Exception as e:
-        if verbose:
-            print(f"An error occurred while extracting PMIDs from the metadata: {e}")
-        return False, f"An error occurred while extracting PMIDs from the metadata: {e}"
-    
-    # Make API calls to get the works for the PMIDs
-    if verbose: print("Fetching works data from the API...")
-    works, failed_calls = get_works(
-        ids=pmids,
-        email=os.environ.get("EMAIL"), # Will return an empty string if the variable is not set
-        select_fields="id,doi,title,cited_by_count,updated_date",
-        show_progress=verbose
-    )
-    
-    # Iterate over the rows in metadata and update the cited_by_count and updated_date
-    if verbose: print("Updating the citation counts...")
-    counter = 0
-    for index, row in metadata.iterrows():
-        id = row["oaid"]
-        doi = row["doi_url"]
-        updated_date = row["updated_date"]
-        current_cited_by_count = row["cited_by_count"]
-        work = next((work for work in works if work["metadata"]["id"] == id), None)
-        new_cited_by_count = work["metadata"]["cited_by_count"]
-        if new_cited_by_count > int(current_cited_by_count):
+        return False, f"API error: {str(e)}"
+
+    # Update citation counts
+    updated_count = 0
+    errors = []
+
+    if verbose:
+        print("Updating citation counts...")
+    for idx, row in metadata.iterrows():
+        try:
+            oaid = str(row["oaid"])
+            doi = row["doi_url"]
+            current_citations = int(row["cited_by_count"]) if pd.notna(row["cited_by_count"]) else 0
+            
+            work = next((w for w in works if w["metadata"]["id"] == oaid), None)
+            
+            if not work:
+                continue
+                
             try:
-                if verbose: print(f"Updating the cited_by_count for ID: {id} / DOI: {doi} from {current_cited_by_count} to {new_cited_by_count}")
-                metadata.at[index, "cited_by_count"] = new_cited_by_count
-                metadata.at[index, "updated_date"] = work["metadata"]["updated_date"] # Leave the date as a string
-                counter += 1
-            except Exception as e:
-                if verbose: print(f"Failed to update the cited_by_count for PMID: {pmid}. Error: {e}")
-        else:
-            if verbose: print(f"Citation count {current_cited_by_count} for ID {id} with DOI {doi} is up-to-date. Skipping...")
+                new_citations = work["metadata"]["cited_by_count"]
+            except TypeError as e:
+                if verbose:
+                    print(f"TypeError: {e}")
+                    print(f"Work: {work}")
+                    print(f"Row type: {row['type']}")
+                continue
+
+            if new_citations > current_citations:
+                if verbose:
+                    print(f"Updating citations for OAID: {oaid} / DOI: {doi} from {current_citations} to {new_citations}")
+                metadata.at[idx, 'cited_by_count'] = str(new_citations)
+                metadata.at[idx, 'updated_date'] = work["metadata"]["updated_date"]
+                updated_count += 1
+            else:
+                if verbose:
+                    print(f"Citation count for OAID: {oaid} / DOI: {doi} is up-to-date. Citation count: {current_citations}. Skipping...")
+                    
+        except Exception as e:
+            errors.append(f"Error processing {oaid}: {str(e)}")
+            if verbose:
+                print(f"Failed to update the cited_by_count for ID: {oaid}")
+                print(e)
             continue
 
-    if verbose: print(f"Updated values for {counter} articles.")
-    if counter > 0:
-        if verbose: print("Saving the updated metadata to a CSV file...")
-        metadata.to_csv(file_path, index=False)
-        if verbose: print("Saving a backup file to disk...")
-        bkp_file_path = file_path.replace(".csv", f"_bkp-{datetime.now().strftime('%Y%m%d-%Hh%Mm')}.csv")
-        metadata_bkp.to_csv(bkp_file_path, index=False)
-        if verbose: print("Metadata updated successfully.")
+    # Save updates if any were made
+    if updated_count > 0:
+        if save_metadata_to_disk:
+            if save_backup:
+                try:
+                    if verbose:
+                        print("Saving a backup of the original metadata file...")
+                    backup_timestamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+                    backup_path = file_path.replace(".csv", f"_bkp-{backup_timestamp}.csv")
+                    metadata_backup.to_csv(backup_path, index=False)
+                except Exception as e:
+                    return False, f"Error saving backup: {str(e)}"
 
-        # Get the path to the log file from the metadata file path
-        log_file_path = os.path.join(os.path.dirname(file_path), "update-log.json") 
+            if verbose:
+                print("Saving updated metadata to disk...")
+            try:
+                metadata.to_csv(file_path, index=False)
+            except Exception as e:
+                return False, f"Error saving updated metadata to disk: {str(e)}"
+            
+            if save_log_file:
+                if verbose:
+                    print("Updating the log file...")
+                try:
+                    log_data = {
+                        "last_modified": datetime.now().strftime('%Y-%m-%d'),
+                        "status_message": f"Successfully updated citation counts for {updated_count} articles",
+                    }
+                    with open(os.path.join(os.path.dirname(file_path), "update-log.json"), 'w') as f:
+                        json.dump(log_data, f, indent=2)
+                except Exception as e:
+                    return False, f"Error updating log file: {str(e)}"
         
-        # Update the log file
-        try:
-            if verbose: print("Updating the log file...")
-            with open(log_file_path, "r") as f:
-                update_log = json.load(f)
-            current_date = datetime.now().strftime("%Y-%m-%d")
-            update_log["last_modified"] = current_date # Expected format: {"last_modified": "2024-08-06"}
-            with open(log_file_path, "w") as f:
-                json.dump(update_log, f)
-            if verbose: print(f"Log file updated successfully.")
-        except Exception as e:
-            if verbose: print(f"Error updating log file: {e}. Creating a new log file...")
-            current_date = datetime.now().strftime("%Y-%m-%d")
-            with open(log_file_path, "w") as f:
-                json.dump({"last_modified": current_date}, f)
-            if verbose: print(f"New log file created successfully.")
-
-        return True, f"Updated values for {counter} articles and saved file to {file_path}. Backup saved as {bkp_file_path}"
+            return True, f"Successfully updated citation counts for {updated_count} articles and saved metadata to disk."
+        else: 
+            return True, f"Successfully updated citation counts for {updated_count} articles. No changes saved to disk."
     else:
-        return False, "Loaded metadata were up-to-date. No changes were made."
+        return True, "No updates made. Citation counts were up-to-date."
 
 from typing import List, Dict, Any
 
