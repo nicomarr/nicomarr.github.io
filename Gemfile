@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 # gem "jekyll", "~> 4.3.3"
-gem "minima", "~> 3"
+# gem "minima", "~> 3"
+# To use the current (local) version of the minima gem:
+gem "minima", "~> 2.5"
 # To use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 gem "github-pages", "~> 232", group: :jekyll_plugins
