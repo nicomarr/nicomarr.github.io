@@ -92,7 +92,7 @@ In a nutshell, the process of tool / function calling involves multiple steps, a
 <br>
 
 **Figure 1.** Flowchart of a basic LLM-powered application with function calling, illustrating the process from user input to final response generation.
-![Figure 1](/assets/img/fucntion-calling.svg)
+![Figure 1](/assets/img/function-calling.svg)
 <br>
 <br>
 
