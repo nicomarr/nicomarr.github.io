@@ -12,10 +12,11 @@ theme: minima
 #   - jekyll-feed
 
 header_pages:
-  - tutorials.markdown
-  - publications.markdown
-  - tools.markdown
-  - about.markdown
+  - tutorials.md
+  - publications.md
+  - tools.md
+  - services.md
+  - about.md
 
 include:
   - _data/articles-metadata.csv
