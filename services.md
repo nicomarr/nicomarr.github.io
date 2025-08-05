@@ -16,4 +16,4 @@ I'm developing a practical course to help biomedical researchers harness Large L
 - Focus on responsible AI use in research contexts
 - Options for reduced-cost access for qualifying individuals and institutions
 
-Interested? [Connect with me on LinkedIn](https://de.linkedin.com/in/nico-marr-3b53a893) for updates.
+Interested? [Contact with me](https://nicomarr.github.io/contact/) for updates.

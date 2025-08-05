@@ -3,7 +3,7 @@ title: "Home"
 description: >-
   (c) 2025 Nico Marr.
 baseurl: ""
-url: ""
+url: "https://nicomarr.github.io"
 github_username:  nicomarr
 
 # Build settings
@@ -17,6 +17,14 @@ header_pages:
   - tools.md
   - services.md
   - about.md
+  - contact.md
+
+# Default settings for pages
+defaults:
+  - scope:
+      path: "thanks.md"
+    values:
+      sitemap: false
 
 include:
   - _data/articles-metadata.csv
