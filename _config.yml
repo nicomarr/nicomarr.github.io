@@ -12,10 +12,10 @@ theme: minima
 #   - jekyll-feed
 
 header_pages:
-  - tutorials.md
   - publications.md
   - tools.md
-  - services.md
+  - teaching.md
+  - tutorials.md
   - about.md
   - contact.md
 
