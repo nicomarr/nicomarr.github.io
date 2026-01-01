@@ -1,7 +1,7 @@
 # Site settings
 title: "Home"
 description: >-
-  (c) 2025 Nico Marr.
+  © 2024–{{ site.time | date: "%Y" }} Nico Marr. All rights reserved.
 baseurl: ""
 url: "https://nicomarr.github.io"
 github_username:  nicomarr
