@@ -4,7 +4,7 @@ from typing import Tuple, Set, List, Dict, Any
 from copy import deepcopy
 from datetime import datetime
 import pandas as pd
-from openalex_api_utils import get_works
+from openalex_api_lite import get_works
 
 def update_citations(
     file_path: str,
