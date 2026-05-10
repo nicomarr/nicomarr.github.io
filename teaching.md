@@ -23,7 +23,7 @@ I offer hands-on training on using Large Language Models for biomedical research
 - Systematic error analysis and evaluation of agentic workflows
 - Literature synthesis and document processing with citations
 - Data exploration, transformation, and visualization
-- Automating information retrieval
+- Automating information retrieval and building agent skills
 
 **Format Options:**
 
@@ -33,7 +33,7 @@ I offer hands-on training on using Large Language Models for biomedical research
 - No programming experience required
 - Options for reduced-cost access for qualifying individuals and institutions
 
-**Availability:** I am available for new training engagements starting **mid-June / July 2026**. [Get in touch](https://nicomarr.github.io/contact/) to discuss how a course could work for your team.
+**Availability:** I am available for new training engagements starting **October 2026**. [Get in touch](https://nicomarr.github.io/contact/) to discuss how a course could work for your team.
 
 <br>
 
