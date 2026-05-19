@@ -46,10 +46,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # openalex_api_lite + website_utils + main.py only need these.
-          # ipython is required because openalex_api_lite.py imports
-          # IPython.display at module level (used by list_works in notebooks).
-          pip install httpx tqdm pandas ipython
+          # Dependency set lives in _py/requirements.txt so it's reproducible
+          # outside CI too. ipython is required because openalex_api_lite.py
+          # imports IPython.display at module level (used by list_works in
+          # notebooks); drop it from the file if that import ever gets
+          # moved inside the function.
+          pip install -r _py/requirements.txt
 
       - name: Verify EMAIL secret is set
         env:
