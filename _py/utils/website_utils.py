@@ -321,7 +321,8 @@ def append_metadata(metadata_file_path: str, pmid_file_path: str, exclude_errata
     new_pmids_str = ", ".join(new_pmids) # Convert to a string with comma-separated values
     if verbose: print(f"Found {len(new_pmids)} new PMID(s): {new_pmids_str}.")
     if len(new_pmids) == 0:
-        return False, "No new PMIDs found."
+        # Nothing to do is a successful no-op, not a failure.
+        return True, "No new PMIDs found."
     else:
         try:
             # Make API calls to get the missing PMIDs
@@ -352,12 +353,14 @@ def append_metadata(metadata_file_path: str, pmid_file_path: str, exclude_errata
             return False, f"An error occurred while parsing the data for new articles: {e}"
         
         if df_new_articles.empty:
+            # All candidate PMIDs were filtered out (e.g. all were errata) —
+            # successful no-op, not a failure.
             if exclude_errata:
                 if verbose: print("No new articles found (Errata excluded).")
-                return False, "No new articles found (Errata excluded)."
+                return True, "No new articles found (Errata excluded)."
             else:
                 if verbose: print("No new articles found.")
-                return False, "No new articles found."
+                return True, "No new articles found."
         else:
             # Append the new articles to the existing metadata
             new_pmids = set(df_new_articles["pmid"])
