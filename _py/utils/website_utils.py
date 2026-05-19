@@ -203,6 +203,11 @@ def parse_data(works: List[Dict[str, Any]], exclude_errata: bool = True) -> pd.D
     oa_data = []
     for work in works:
         metadata = work["metadata"]
+        # Skip errata up front when caller asked us to exclude them — avoids
+        # parsing rows we're going to drop, and dodges missing-field crashes
+        # (errata don't have cited_by_api_url in OpenAlex).
+        if exclude_errata and metadata.get("type") == "erratum":
+            continue
         first_author_last_name = metadata["authorships"][0]["author"]["display_name"].split(" ")[-1]
         article_title = metadata["title"]
         journal = metadata["primary_location"]["source"]["display_name"]
@@ -228,7 +233,8 @@ def parse_data(works: List[Dict[str, Any]], exclude_errata: bool = True) -> pd.D
             pdf_url = "not available"
         doi_url = metadata["doi"]
         cited_by_count = str(metadata["cited_by_count"])
-        cited_by_ui_url = metadata["cited_by_api_url"].replace("api.openalex.org", "openalex.org")
+        # Defensive: some record types (errata, retractions) omit cited_by_api_url.
+        cited_by_ui_url = (metadata.get("cited_by_api_url") or "").replace("api.openalex.org", "openalex.org")
         work_type = metadata.get("type")
         type_crossref = metadata.get("type_crossref")
         updated_date = metadata.get("updated_date")
