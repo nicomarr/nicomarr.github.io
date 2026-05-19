@@ -11,3 +11,5 @@ _py/test_data/
 .Rhistory
 _data/articles-metadata_bkp*
 .specstory/
+.vscode/
+update_website_data.md
