@@ -233,8 +233,13 @@ def parse_data(works: List[Dict[str, Any]], exclude_errata: bool = True) -> pd.D
             pdf_url = "not available"
         doi_url = metadata["doi"]
         cited_by_count = str(metadata["cited_by_count"])
-        # Defensive: some record types (errata, retractions) omit cited_by_api_url.
-        cited_by_ui_url = (metadata.get("cited_by_api_url") or "").replace("api.openalex.org", "openalex.org")
+        # Derive the UI URL from the OAID rather than the API's cited_by_api_url field.
+        # OpenAlex omits cited_by_api_url for new/low-citation works and some
+        # record types (errata, retractions); the URL pattern is deterministic,
+        # so deriving is more reliable and produces the same string for records
+        # where the API does populate the field.
+        oaid_short = oaid.split("/")[-1] if oaid else ""
+        cited_by_ui_url = f"https://openalex.org/works?filter=cites:{oaid_short}" if oaid_short else ""
         work_type = metadata.get("type")
         type_crossref = metadata.get("type_crossref")
         updated_date = metadata.get("updated_date")
