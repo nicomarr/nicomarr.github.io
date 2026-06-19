@@ -9,7 +9,7 @@ permalink: /about/
 For over 20 years, I have dedicated my career to conducting biomedical research, spanning from basic and pre-clinical research to observational clinical studies.
 
 ### Current Roles
-I'm currently an independent biomedical researcher and freelance educator based in Germany, specializing in training for AI-enabled research. I'm also Co-founder and Executive Director of [Theme Bio](https://www.themebio.org) (website under development), a US nonprofit empowering biomedical researchers in resource-limited settings through AI tools, training, and mentorship.
+I'm an independent biomedical researcher and freelance educator based in Germany, specializing in training for AI-enabled research. I'm also Co-founder, Board Chair and Executive Director of [Theme Bio](https://themebio.org), a U.S. 501(c)(3) organization empowering biomedical researchers in resource-limited settings through AI tools, training, and mentorship.
 
 <br><br>
 
