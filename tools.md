@@ -3,8 +3,26 @@ layout: page
 title: Code
 permalink: /code/
 ---
- 
-Below is a list of my contributions to open source software projects and tools:
+
+Below is a list of my open-source software contributions:
+
+<section>
+    <h3>Safer Codespace</h3>
+    <p>A template development environment for working with AI coding agents (<a href="https://docs.claude.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a> and <a href="https://pi.dev" target="_blank" rel="noopener noreferrer">Pi</a>) and the <a href="https://llm.datasette.io/" target="_blank" rel="noopener noreferrer">llm CLI</a>, with a defense-in-depth setup that reduces prompt injection and data exfiltration risks. Released under the MIT license.</p>
+    <p>
+        <a href="{% post_url 2025-10-27-safer-codespace %}">Blog Post</a> |
+        <a href="https://github.com/nicomarr/safer-codespace" target="_blank" rel="noopener noreferrer">Source Code on GitHub</a>
+    </p>
+</section>
+
+<section>
+    <h3>Agent Skills</h3>
+    <p>Open-source collections of <a href="https://agentskills.io/" target="_blank" rel="noopener noreferrer">Agent Skills</a>, reusable tools that install into Claude Code, Claude Cowork, and other Agent Skills-compatible clients. Each repository is also a GitHub template with a preconfigured devcontainer, so you can open it in GitHub Codespaces with the tools preinstalled and try the skills right away. Released under the MIT license. Source code, plus install and usage instructions, are in each repository's README.</p>
+    <ul>
+        <li><a href="https://github.com/nicomarr/ai4biomed-skills" target="_blank" rel="noopener noreferrer">ai4biomed-skills</a>: skills for biomedical literature research (PubMed and OpenAlex search with citation enrichment) and research document authoring. Codespaces image preinstalls <a href="https://docs.claude.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a>, <a href="https://pi.dev" target="_blank" rel="noopener noreferrer">Pi</a>, and the <a href="https://llm.datasette.io/" target="_blank" rel="noopener noreferrer">llm CLI</a>.</li>
+        <li><a href="https://github.com/nicomarr/ai4nonprofit-skills" target="_blank" rel="noopener noreferrer">ai4nonprofit-skills</a>: skills for nonprofit and community-led organizations, such as co-authoring funder-facing documents. Codespaces image preinstalls <a href="https://docs.claude.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a> and the <a href="https://llm.datasette.io/" target="_blank" rel="noopener noreferrer">llm CLI</a>.</li>
+    </ul>
+</section>
 
 <section>
     <h3>Scholaris</h3>
