@@ -1,0 +1,106 @@
+---
+# Front matter (even if empty) is required for Jekyll to process this file.
+# This overrides the minima gem's own assets/main.scss at the same path, which
+# is what _layouts/default.html links as /assets/main.css.
+---
+
+@import "minima";
+
+// ===========================================================================
+//  Site overrides
+//  minima 2.5.1 defaults kept unless noted. Variables available after the
+//  import above: $text-color #111, $grey-color #828282,
+//  $grey-color-light #e8e8e8, $spacing-unit 30px.
+// ===========================================================================
+
+// --- Headings -------------------------------------------------------------
+// Heading levels are chosen for document structure (h1 > h2 > h3, no skipped
+// level); sizes are set here rather than inherited from minima's defaults,
+// which run large (h2 32px, h3 26px) and light (weight 400) for the compact
+// section labels this site uses.
+
+.post-content {
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 36px;
+    margin-bottom: 14px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+}
+
+// --- Participant testimonials --------------------------------------------
+// One container holding all quotes, rather than a card per quote: minima's
+// only bordered, rounded, filled surface is `pre`/`code`, so repeated hairline
+// boxes would echo code blocks. The panel fill is a warm grey, deliberately
+// unlike minima's bluish #eef code background.
+//
+// Markup is <figure><blockquote>…</blockquote><figcaption>…</figcaption></figure>,
+// so the attribution (site author's text) sits outside the quotation (the
+// participant's words) rather than inside it.
+
+$panel-bg:   #f7f7f5;
+$panel-rule: #dcdcd6;
+
+.testimonials {
+  background: $panel-bg;
+  border-radius: 4px;
+  padding: 24px 28px 6px;
+  margin-bottom: $spacing-unit / 2;
+
+  > h3 {
+    text-align: center;
+    margin: 4px 0;
+  }
+
+  .intro {
+    text-align: center;
+    color: $grey-color;
+    font-size: 15px;
+    max-width: 46ch;
+    margin: 0 auto 24px;
+  }
+
+  .testimonial {
+    margin: 0 0 24px;
+  }
+
+  // Overrides minima's global blockquote rule, which sets italic, grey and
+  // letter-spacing: -1px — too tight and too low-contrast for quotes of this
+  // length.
+  blockquote {
+    margin: 0;
+    padding: 0 0 0 15px;
+    border-left: 4px solid $panel-rule;
+    color: #3f3f3f;
+    font-size: 17px;
+    line-height: 1.6;
+    font-style: normal;
+    letter-spacing: normal;
+  }
+
+  figcaption {
+    margin: 6px 0 0 19px;
+    color: $grey-color;
+    font-size: 14px;
+
+    strong {
+      color: #3f3f3f;
+      font-weight: 600;
+    }
+  }
+}
+
+// --- Closing affiliation note --------------------------------------------
+
+.affiliation {
+  color: #3f3f3f;
+  font-size: 15px;
+}
