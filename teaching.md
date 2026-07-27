@@ -54,6 +54,10 @@ I am available for new training engagements starting **October 2026**. [Get in t
     <figcaption>— <strong>Samuel Adusi Poku</strong></figcaption>
   </figure>
   <figure class="testimonial">
+    <blockquote><p>I am confident in engineering prompts to get as close to the output I want. To reproduce the operations and outputs for larger data sets, exposure to notebooks has helped me get almost reproducible output for most of the work where I need the aid of an LLM.</p></blockquote>
+    <figcaption>— <strong>Dennis Adu-Gyasi</strong></figcaption>
+  </figure>
+  <figure class="testimonial">
     <blockquote><p>Lessons were well delivered, and the support sessions gave more clarity and appreciation for the course.</p></blockquote>
     <figcaption>— <strong>Emmanuel Kwesi Yeboah Tchum</strong></figcaption>
   </figure>
